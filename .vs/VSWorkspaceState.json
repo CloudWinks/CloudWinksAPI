@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\CloudWinksServiceAPI",
+    "\\CloudWinksServiceAPI\\Controllers",
+    "\\CloudWinksServiceAPI\\Models"
+  ],
+  "SelectedNode": "\\.github\\workflows",
+  "PreviewInSolutionExplorer": false
+}
