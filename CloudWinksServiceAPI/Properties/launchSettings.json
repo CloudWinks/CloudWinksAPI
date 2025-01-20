@@ -2,7 +2,7 @@
   "profiles": {
     "http": {
       "commandName": "Project",
-      "workingDirectory": "D:\\Users\\kalar\\IIS\\Service",
+      "workingDirectory": "C:\\Users\\User\\Desktop\\CloudWinksAPI-main\\CloudWinksAPI-main\\CloudWinksServiceAPI\\CloudWinksServiceAPI",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {

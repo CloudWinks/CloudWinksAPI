@@ -1,7 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Reflection.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using CloudWinksServiceAPI.Models;
 
 namespace CloudWinksServiceAPI.Data
@@ -21,33 +18,18 @@ namespace CloudWinksServiceAPI.Data
         public DbSet<CWMenuTabOption> CWMenuTabOptions { get; set; }
         public DbSet<CWParam> CWParams { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=Framework;User=developer;Password=TrumpFor2024;MultipleActiveResultSets=true;TrustServerCertificate=True");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CWApp>()
-                .HasKey(a => a._appid); // Set ActionId as the primary key
-            modelBuilder.Entity<CWAction>()
-                .HasKey(a => a.ActionId);
-            modelBuilder.Entity<CWButton>()
-                .HasKey(a => a.ButtonId);
-            modelBuilder.Entity<CWConstant>()
-                .HasKey(a => a.ConstantName);
-            modelBuilder.Entity<CWControl>()
-                .HasKey(a => a.ControlId);
-            modelBuilder.Entity<CWField>()
-                .HasKey(a => a.FieldId);
-            modelBuilder.Entity<CWKey>()
-                .HasKey(a => a.KeyId);
-            modelBuilder.Entity<CWMenuTabOption>()
-                .HasKey(a => a.OptionId);
-            modelBuilder.Entity<CWParam>()
-                .HasKey(a => a.ParamId);
-            
+            // Configure entity keys
+            modelBuilder.Entity<CWApp>().HasKey(a => a._appid);
+            modelBuilder.Entity<CWAction>().HasKey(a => a.ActionId);
+            modelBuilder.Entity<CWButton>().HasKey(a => a.ButtonId);
+            modelBuilder.Entity<CWConstant>().HasKey(a => a.ConstantName);
+            modelBuilder.Entity<CWControl>().HasKey(a => a.ControlId);
+            modelBuilder.Entity<CWField>().HasKey(a => a.FieldId);
+            modelBuilder.Entity<CWKey>().HasKey(a => a.KeyId);
+            modelBuilder.Entity<CWMenuTabOption>().HasKey(a => a.OptionId);
+            modelBuilder.Entity<CWParam>().HasKey(a => a.ParamId);
         }
-
     }
 }

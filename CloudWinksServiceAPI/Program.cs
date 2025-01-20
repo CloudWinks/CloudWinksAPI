@@ -5,23 +5,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add database context for ZibitDbContext
-builder.Services.AddDbContext<ZibitDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ZibitDatabase")));
 
 // Add database context for FrameworkDbContext
 builder.Services.AddDbContext<FrameworkDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FrameworkDatabase")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Initialize DatabaseConnectionManager with default connection string and logger
-string defaultConnectionString = builder.Configuration.GetConnectionString("FrameworkDatabase");
-builder.Services.AddSingleton(sp =>
-    new DatabaseConnectionManager(defaultConnectionString, sp.GetRequiredService<ILogger<DatabaseConnectionManager>>()));
+// Initialize DatabaseConnectionManager with default connection string
+string defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(defaultConnectionString))
+{
+    throw new InvalidOperationException("DefaultConnection is not configured in appsettings.json.");
+}
+builder.Services.AddSingleton(new DatabaseConnectionManager(defaultConnectionString));
 
 // Add custom services
 builder.Services.AddScoped<IDynamicQueryService, DynamicQueryService>();
